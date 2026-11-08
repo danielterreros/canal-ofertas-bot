@@ -2,8 +2,6 @@
 [![YouTube](https://badgen.net/badge/icon/youtube/FF0000?icon=youtube&label)](https://youtube.com/@danielotech?sub_confirmation=1)
 [![Instagram](https://badgen.net/badge/icon/instagram/E4405F?icon=instagram&label)](https://instagram.com/danytc87)
 [![TikTok](https://badgen.net/badge/icon/tiktok/000000?icon=tiktok&label)](https://tiktok.com/@danielotech)
-[![Facebook](https://badgen.net/badge/icon/facebook/0866FF?icon=facebook&label)](https://facebook.com/danielotech)
-[![X](https://badgen.net/badge/icon/x/000000?icon=x&label)](https://x.com/danielotech)
 [![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/danielterreros/canal-ofertas-bot)
 [![Docker](https://badgen.net/badge/icon/docker?icon=docker&label)](https://hub.docker.com/r/danielterreros/canal-ofertas-bot)
 [![Docker Pulls](https://badgen.net/docker/pulls/danielterreros/canal-ofertas-bot?icon=docker&label=pulls)](https://hub.docker.com/r/danielterreros/canal-ofertas-bot)
