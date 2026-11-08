@@ -1,0 +1,5 @@
+# Solo construcción. No se copian a la imagen final.
+setuptools==84.2.1 \
+    --hash=sha256:ca140b45d5325a9478f880e351484f62fef15f336462e449ca0c03c873d589c2
+pybind11==3.1.0 \
+    --hash=sha256:b8488090f8acffbcb6b5d6a85571a6827a0a2981ffb75e5a0b27b87c4a6b7dd0

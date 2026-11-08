@@ -1,0 +1,9 @@
+# Pillow: única dependencia Python de ejecución, distribuida mediante PyPI.
+# sdist para Docker; wheels CPython 3.14 Linux/macOS y 3.12 macOS para desarrollo.
+Pillow==13.0.0 \
+    --hash=sha256:49c12af515073e9bf511e4ef736743bf70d531a643668722279314b937742ba4 \
+    --hash=sha256:5933fcea5a5ba64c686f55c886a115cbfd92f2900460784a1e79909fdbafd7b6 \
+    --hash=sha256:cdcd1ba258178f7356d74170c9a81ba4eab6a5d55748bc402a5a2a6fe6be3510 \
+    --hash=sha256:d9b0a2bee3f3e03e9f29057aedb807dbf1e1d96ee1b9d0f422d9db6c8583271d \
+    --hash=sha256:e91c2b1cbeae768c98752e67e717e283d68dae45717b41f2d91eaee648e37b7d \
+    --hash=sha256:fc481f742ccda20e9ed760b8f978dff50f2a4e9bc253ac167fb0a05b0783ef52

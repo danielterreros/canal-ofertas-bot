@@ -1,0 +1,12 @@
+# Solo se envía al constructor lo necesario para la imagen de producción.
+**
+!Dockerfile
+!.dockerignore
+!requirements.lock
+!requirements-build.lock
+!docker/
+docker/**
+!docker/debian.sources
+!canal_ofertas_bot/
+canal_ofertas_bot/**
+!canal_ofertas_bot/*.py

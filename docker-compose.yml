@@ -1,0 +1,36 @@
+services:
+  canal-ofertas-bot:
+    image: danielterreros/canal-ofertas-bot:latest
+    container_name: canal-ofertas-bot
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    stop_grace_period: 60s
+    tmpfs:
+      - /tmp:size=33554432,mode=1777
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:?} # Token del bot de Telegram.
+      - TELEGRAM_OWNER_ID=${TELEGRAM_OWNER_ID:?} # ID de usuario de Telegram.
+      - TELEGRAM_CHANNEL_ID=${TELEGRAM_CHANNEL_ID:?} # ID del grupo o canal de Telegram.
+      - TZ=Europe/Madrid # Tu zona horaria.
+      - IMAGE_BRAND_TEXT=TU MARCA # Texto de marca.
+      - IMAGE_BRAND_COLOR=#172433 # Color del texto de marca.
+      - IMAGE_CURRENT_PRICE_COLOR=#008940 # Color del precio actual.
+      - IMAGE_PREVIOUS_PRICE_COLOR=#737b83 # Color del precio anterior.
+      - IMAGE_DISCOUNT_BADGE_COLOR=#e34538 # Color de la etiqueta de descuento.
+      - IMAGE_DEAL_TYPE_BADGE_COLOR=#188451 # Color de la etiqueta del tipo de oferta.
+      - SHOW_PROMOTION_IN_IMAGE=true # Muestra el tipo de oferta en la imagen.
+      - SHOW_PROMOTION_IN_CAPTION=true # Muestra el tipo de oferta en el mensaje.
+      - PUBLICATION_FOOTER= # Firma opcional: 🗣️ Visto en @canal.
+      - SCHEDULE_PERMISSIONS=own # own: cada usuario gestiona sus programadas; all: todos gestionan todas.
+    volumes:
+      - bot-data:/data
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  bot-data: {}
