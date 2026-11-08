@@ -42,4 +42,4 @@ CMD ["python", "-m", "canal_ofertas_bot"]
 FROM runtime AS production
 LABEL org.opencontainers.image.title="Canal Ofertas Bot" \
       org.opencontainers.image.description="Preparación privada y aprobación explícita; un único contenedor con SQLite" \
-      org.opencontainers.image.version="1.0.0"
+      org.opencontainers.image.version="1.0.1"
