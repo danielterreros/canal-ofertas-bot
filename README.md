@@ -25,7 +25,7 @@
 3. Para conocer tu propio chat ID (lo necesitas para `TELEGRAM_OWNER_ID`), usa el bot  [@userinfobot](https://t.me/userinfobot).
 4. Para conocer el ID del grupo o canal de Telegram donde quieres publicar las ofertas (lo necesitas para `TELEGRAM_CHANNEL_ID`), usa el bot  [@userinfobot](https://t.me/userinfobot).
 5. Añade tu bot al grupo o canal de destino. En un canal, hazlo administrador y dale permiso para publicar y eliminar mensajes. En un grupo, asegúrate de que puede enviar fotos.
-6. *(Opcional)* Es recomendable poner al bot la misma foto de perfil que uses en tu canal de ofertas de Telegram. De esta forma, tanto si publicas manualmente en tu canal como si lo haces a través del bot, las publicaciones se verán con la misma imagen. Para cambiarla, envía /setuserpic a @BotFather, selecciona tu bot y envía la foto.
+6. *(Opcional)* Es recomendable poner al bot la misma foto de perfil que uses en tu canal de ofertas de Telegram. De esta forma, tanto si publicas manualmente en tu canal como si lo haces a través del bot, las publicaciones se verán con la misma imagen. Para cambiarla, envía `/setuserpic` a @BotFather, selecciona tu bot y envía la foto.
 
 
 ### 2. Arranca el contenedor
