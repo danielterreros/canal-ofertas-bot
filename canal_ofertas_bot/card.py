@@ -42,13 +42,22 @@ def render_card(product: Product, photo: bytes, config) -> bytes:
     image = decode_photo(photo, config.integer("MAX_IMAGE_PIXELS"))
     canvas = Image.new("RGB", (1200, 900), "white")
     pen = ImageDraw.Draw(canvas)
+    font_dir = Path(config["FONT_DIR"])
+    font_names = ("font-regular.ttf", "font-bold.ttf")
+    # Keep existing font folders working; never mix the two naming schemes.
+    if not any((font_dir / name).exists() for name in font_names):
+        font_names = ("DejaVuSans.ttf", "DejaVuSans-Bold.ttf")
 
     def font(size: int, bold: bool = False):
-        name = "DejaVuSans-Bold.ttf" if bold else "DejaVuSans.ttf"
+        name = font_names[1 if bold else 0]
+        path = font_dir / name
         try:
-            return ImageFont.truetype(str(Path(config["FONT_DIR"]) / name), size)
+            if not path.is_file():
+                raise OSError()
+            return ImageFont.truetype(str(path), size)
         except OSError:
-            raise ValueError("Faltan las fuentes DejaVu dentro de la imagen; revisa FONT_DIR.") from None
+            raise ValueError(f"No se pudo cargar {name}. Revisa FONT_DIR: debe contener font-regular.ttf y "
+                             "font-bold.ttf, o los dos archivos DejaVu originales.") from None
 
     def fitted(text, size, width, bold=True):
         while size > 10:
