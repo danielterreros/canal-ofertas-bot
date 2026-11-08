@@ -122,7 +122,7 @@ Estas son las variables que aparecen en el Compose. Puedes cambiar estos valores
 | `SHOW_PROMOTION_IN_IMAGE=true`        | Muestra el tipo de oferta en la imagen.                                                                                                                                                           |
 | `SHOW_PROMOTION_IN_CAPTION=true`      | Muestra el tipo de oferta en el mensaje.                                                                                                                                                          |
 | `PUBLICATION_FOOTER=`                 | Permite añadir una firma o un enlace del canal donde se publica la oferta. Por defecto: sin firma.                                                                                                |
-| `SCHEDULE_PERMISSIONS=own`            | `own`: cada persona ve y anula solo sus programaciones. <br>`all`: las personas autorizadas pueden ver y anular las de todos. En `TELEGRAM_OWNER_ID=` debe haber al menos dos IDs de usuario.<br> |
+| `SCHEDULE_PERMISSIONS=own`            | Define qué publicaciones programadas puede ver y anular cada usuario autorizado. [Cómo configurar los permisos](docs/permisos-programadas.md).                                                    |
 
 Estas son variables opcionales que no aparecen en el Compose. Puedes añadir estos valores en `docker-compose.yml`:
 
