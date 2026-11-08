@@ -145,25 +145,6 @@ Estas son variables opcionales que no aparecen en el Compose. Puedes añadir est
 | `DATA_DIR`                      | `/data`                            | Carpeta **interna del contenedor** para la base de datos. Normalmente no se cambia.                                                                        |
 | `FONT_DIR`                      | `/usr/share/fonts/truetype/dejavu` | Carpeta **interna del contenedor** con las fuentes. Normalmente no se cambia. [Cómo utilizar otra tipografía](docs/fuentes.md).                            |
 
-### Permisos de las publicaciones programadas
-
-`SCHEDULE_PERMISSIONS` decide qué publicaciones pendientes puede **ver y anular** cada persona autorizada.
-
-|Valor|Funcionamiento|
-|---|---|
-|`own`|Cada persona ve y anula solo las publicaciones que ha programado ella. Es el valor predeterminado.|
-|`all`|Todas las personas autorizadas pueden ver y anular las publicaciones programadas por cualquiera de ellas.|
-
-Para cambiarlo, edita esta línea de `docker-compose.yml`:
-
-```
-- SCHEDULE_PERMISSIONS=own
-```
-
-Sustituye `own` por `all` y recrea el contenedor.
-
-Esta opción no autoriza a personas nuevas: los usuarios permitidos siguen siendo los ID indicados en `TELEGRAM_OWNER_ID`. Tampoco cambia el grupo o canal de destino.
-
 ## 🗂️ Datos
 
 Por defecto, Docker guarda los borradores y las publicaciones programadas en el volumen `bot-data`. Los datos permanecen al recrear el contenedor. No necesitas crear una carpeta `data/`.
