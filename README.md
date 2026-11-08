@@ -1,6 +1,22 @@
 # Canal Ofertas Bot
+[![YouTube](https://badgen.net/badge/icon/youtube/FF0000?icon=youtube&label)](https://youtube.com/@danielotech?sub_confirmation=1)
+[![Instagram](https://badgen.net/badge/icon/instagram/E4405F?icon=instagram&label)](https://instagram.com/danytc87)
+[![TikTok](https://badgen.net/badge/icon/tiktok/000000?icon=tiktok&label)](https://tiktok.com/@danielotech)
+[![Facebook](https://badgen.net/badge/icon/facebook/0866FF?icon=facebook&label)](https://facebook.com/danielotech)
+[![X](https://badgen.net/badge/icon/x/000000?icon=x&label)](https://x.com/danielotech)
+[![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/danielterreros/canal-ofertas-bot)
+[![Docker](https://badgen.net/badge/icon/docker?icon=docker&label)](https://hub.docker.com/r/danielterreros/canal-ofertas-bot)
+[![Docker Pulls](https://badgen.net/docker/pulls/danielterreros/canal-ofertas-bot?icon=docker&label=pulls)](https://hub.docker.com/r/danielterreros/canal-ofertas-bot)
+[![Docker Stars](https://badgen.net/docker/stars/danielterreros/canal-ofertas-bot?icon=docker&label=stars)](https://hub.docker.com/r/danielterreros/canal-ofertas-bot)
+[![Docker Image Size](https://badgen.net/docker/size/danielterreros/canal-ofertas-bot?icon=docker&label=image%20size)](https://hub.docker.com/r/danielterreros/canal-ofertas-bot)
+![GitHub Stars](https://badgen.net/github/stars/danielterreros/canal-ofertas-bot?icon=github&label=stars)
+![GitHub Forks](https://badgen.net/github/forks/danielterreros/canal-ofertas-bot?icon=github&label=forks)
+![Last Commit](https://img.shields.io/github/last-commit/danielterreros/canal-ofertas-bot)
+![License](https://badgen.net/github/license/danielterreros/canal-ofertas-bot)
 
 > Publica ofertas de Amazon en tu grupo o canal de Telegram sin apenas esfuerzo. Envías el enlace de un producto, revisas la imagen y el texto, y decides si quieres **publicar** o **programar** la oferta.
+
+![Canal Ofertas Bot](https://raw.githubusercontent.com/danielterreros/pictures/main/canal-ofertas-bot/mockup.png)
 
 ## 🚀 Primeros pasos
 
@@ -11,6 +27,8 @@
 3. Para conocer tu propio chat ID (lo necesitas para `TELEGRAM_OWNER_ID`), usa el bot  [@userinfobot](https://t.me/userinfobot).
 4. Para conocer el ID del grupo o canal de Telegram donde quieres publicar las ofertas (lo necesitas para `TELEGRAM_CHANNEL_ID`), usa el bot  [@userinfobot](https://t.me/userinfobot).
 5. Añade tu bot al grupo o canal de destino. En un canal, hazlo administrador y dale permiso para publicar y eliminar mensajes. En un grupo, asegúrate de que puede enviar fotos.
+6. *(Opcional)* Si quieres ponerle el icono oficial al bot, descarga la imagen [aquí](https://raw.githubusercontent.com/danielterreros/pictures/main/canal-ofertas-bot/canal-ofertas-bot.png) y envíasela a [@BotFather](https://t.me/BotFather) usando la opción `/setuserpic`.
+
 
 ### 2. Arranca el contenedor
 

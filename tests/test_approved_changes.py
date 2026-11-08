@@ -87,6 +87,43 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(edit.product.price, self.p.price)
         self.assertEqual(self.edit(self.original.replace('🏷️ Oferta flash\n\n', '')).product.label, '')
 
+    def test_hidden_label_survives_other_field_edits(self):
+        original = compose_caption(self.p, show_label=False)[0]
+        changes = {
+            'title': original.replace('📦 Producto', '📦 Producto editado'),
+            'price': original.replace('80,00', '75,00'),
+            'reference': original.replace('100,00', '120,00'),
+            'discount': original.replace('20 %', '30 %'),
+        }
+        for field, caption in changes.items():
+            with self.subTest(field=field):
+                edited = synchronize(caption, [], original, self.p, template=True)
+                self.assertEqual(edited.product.label, 'Oferta flash')
+                self.assertIsNone(edited.product.custom_label)
+                self.assertNotIn('🏷', edited.caption)
+
+    def test_hidden_custom_label_survives_title_edit(self):
+        self.p.custom_label = 'Cupón: TECH'
+        original = compose_caption(self.p, show_label=False)[0]
+        edited = synchronize(original.replace('📦 Producto', '📦 Producto editado'),
+                             [], original, self.p, template=True)
+        self.assertEqual(edited.product.custom_label, 'Cupón: TECH')
+        self.assertNotIn('🏷', edited.caption)
+
+    def test_adding_then_removing_label_does_not_restore_extracted_label(self):
+        original = compose_caption(self.p, show_label=False)[0]
+        added = synchronize(original + '\n\n🏷️ Oferta del día', [], original, self.p, template=True)
+        self.assertEqual(added.product.label, 'Oferta del día')
+        removed = synchronize(original, [], added.caption, added.product, template=True)
+        self.assertEqual(removed.product.label, '')
+        edited = synchronize(original.replace('80,00', '75,00'), [], original, removed.product, template=True)
+        self.assertEqual(edited.product.label, '')
+
+    def test_explicit_empty_label_clears_hidden_promotion(self):
+        original = compose_caption(self.p, show_label=False)[0]
+        edited = synchronize(original + '\n\n🏷️ ', [], original, self.p, template=True)
+        self.assertEqual(edited.product.label, '')
+
     def test_full_image_text_keeps_manual_values(self):
         changed = self.original.replace('20 %', '30 %')
         edit = synchronize(changed, [], self.original, self.p, template=False)
@@ -139,6 +176,73 @@ class Workflows(unittest.IsolatedAsyncioTestCase):
         self.assertIn('25 %', edited['caption'])
         self.assertNotEqual(edited['photo'], preview['photo'])
         self.assertEqual(edited['product_data']['price'], '75.00')
+
+    def assert_promotion_badge(self, photo, visible):
+        with Image.open(BytesIO(photo)) as image:
+            red, green, blue = image.convert('RGB').getpixel((48, 126))
+        if visible:
+            self.assertGreater(green, red + 30)
+            self.assertGreater(green, blue + 10)
+        else:
+            self.assertGreater(min(red, green, blue), 240)
+
+    async def test_hidden_caption_price_edit_keeps_image_promotion(self):
+        self.config.values['SHOW_PROMOTION_IN_CAPTION'] = 'false'
+        preview = await self.generated()
+        self.assertNotIn('🏷', preview['caption'])
+        self.assert_promotion_badge(preview['photo'], True)
+        await self.edit_new(preview)
+        await self.text(preview['caption'].replace('80,00', '75,00'))
+        edited = self.store.preview(OWNER)
+        self.assertEqual(edited['product_data']['price'], '75.00')
+        self.assertEqual(Product(**edited['product_data']).label, 'Oferta flash')
+        self.assertNotIn('🏷', edited['caption'])
+        self.assertNotEqual(edited['photo'], preview['photo'])
+        self.assert_promotion_badge(edited['photo'], True)
+
+    async def test_added_hidden_label_can_be_removed_from_image(self):
+        self.config.values['SHOW_PROMOTION_IN_CAPTION'] = 'false'
+        preview = await self.generated()
+        await self.edit_new(preview)
+        await self.text(preview['caption'] + '\n\n🏷️ Oferta del día')
+        added = self.store.preview(OWNER)
+        self.assertEqual(Product(**added['product_data']).label, 'Oferta del día')
+        self.assert_promotion_badge(added['photo'], True)
+        await self.edit_new(added)
+        await self.text(added['caption'].replace('\n\n🏷️ Oferta del día', ''))
+        removed = self.store.preview(OWNER)
+        self.assertEqual(Product(**removed['product_data']).label, '')
+        self.assert_promotion_badge(removed['photo'], False)
+
+    async def test_added_caption_label_respects_disabled_image_promotion(self):
+        self.config.values['SHOW_PROMOTION_IN_CAPTION'] = 'false'
+        self.config.values['SHOW_PROMOTION_IN_IMAGE'] = 'false'
+        preview = await self.generated()
+        self.assert_promotion_badge(preview['photo'], False)
+        await self.edit_new(preview)
+        await self.text(preview['caption'] + '\n\n🏷️ Oferta del día')
+        edited = self.store.preview(OWNER)
+        self.assertIn('🏷️ Oferta del día', edited['caption'])
+        self.assertEqual(Product(**edited['product_data']).label, 'Oferta del día')
+        self.assert_promotion_badge(edited['photo'], False)
+
+    async def test_scheduled_hidden_promotion_survives_edit_and_save(self):
+        self.config.values['SHOW_PROMOTION_IN_CAPTION'] = 'false'
+        preview = await self.generated()
+        post_id = self.store.consume(OWNER, preview['id'], preview['message_id'], CHANNEL, due=self.now+3600)
+        post = self.store.get_post(post_id)
+        await self.q(self.view(post, 'preview', {'media': True}), 'edit')
+        await self.text(post['caption'].replace('80,00', '75,00'))
+        review = self.latest_view('review')
+        self.assertEqual(self.store.get_post(post_id), post)
+        self.assert_promotion_badge(review['state']['photo'], True)
+        await self.q(review, 'save')
+        saved = self.store.get_post(post_id)
+        self.assertEqual(saved['due'], post['due'])
+        self.assertEqual(saved['product_data']['price'], '75.00')
+        self.assertEqual(Product(**saved['product_data']).label, 'Oferta flash')
+        self.assertNotIn('🏷', saved['caption'])
+        self.assert_promotion_badge(saved['photo'], True)
 
     async def test_remove_then_add_image_and_publish_text_only(self):
         preview = await self.generated()

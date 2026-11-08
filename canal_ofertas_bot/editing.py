@@ -88,7 +88,10 @@ def synchronize(caption, entities, original, product, *, template, footer='', ch
                 caption, entities = replace_span(caption, entities, *match.span(), replacement)
             # An absent percentage line stays hidden when only prices change.
         p.show_discount = PERCENT.search(caption) is not None
-        p.price, p.reference, p.custom_label = after['price'], after['reference'], after['label']
+        p.price, p.reference = after['price'], after['reference']
+        # A line absent from both texts does not remove a hidden image label.
+        if LABEL.search(original) or LABEL.search(caption):
+            p.custom_label = after['label']
         p.manual_discount = int(discount.quantize(Decimal('1'), rounding=ROUND_HALF_UP)) if discount is not None else None
         p.title = title_from_caption(caption)
     entities = restore_price_format(caption, entities)
