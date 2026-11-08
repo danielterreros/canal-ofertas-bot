@@ -121,29 +121,29 @@ Estas son las variables que aparecen en el Compose. Puedes cambiar estos valores
 | `IMAGE_DEAL_TYPE_BADGE_COLOR=#188451` | Color de la etiqueta del tipo de oferta en formato HEX. Consultar en: [htmlcolorcodes.com](https://htmlcolorcodes.com/es/)                                                                        |
 | `SHOW_PROMOTION_IN_IMAGE=true`        | Muestra el tipo de oferta en la imagen.                                                                                                                                                           |
 | `SHOW_PROMOTION_IN_CAPTION=true`      | Muestra el tipo de oferta en el mensaje.                                                                                                                                                          |
-| PUBLICATION_FOOTER=                   | Permite añadir una firma o un enlace del canal donde se publica la oferta. Por defecto: sin firma.                                                                                                |
+| `PUBLICATION_FOOTER=`                 | Permite añadir una firma o un enlace del canal donde se publica la oferta. Por defecto: sin firma.                                                                                                |
 | `SCHEDULE_PERMISSIONS=own`            | `own`: cada persona ve y anula solo sus programaciones. <br>`all`: las personas autorizadas pueden ver y anular las de todos. En `TELEGRAM_OWNER_ID=` debe haber al menos dos IDs de usuario.<br> |
 
 Estas son variables opcionales que no aparecen en el Compose. Puedes añadir estos valores en `docker-compose.yml`:
 
-| Variable                        | Valor predeterminado               | Para qué sirve                                                                                           |
-| ------------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `PREVIEW_TTL_SECONDS`           | `86400`                            | Caducidad del borrador desde su creación, en segundos. Por defecto: 24 h.                                |
-| `ENABLE_PUBLISH`                | `true`                             | Permite publicar y programar. `false` desactiva ambas acciones.                                          |
-| `AMAZON_FETCH_HTML`             | `true`                             | Intenta obtener los datos desde Amazon. `false` deja la preparación manual.                              |
-| `SCHEDULE_MAX_DELAY_SECONDS`    | `900`                              | Retraso máximo en segundos para enviar una programación cuya hora ya pasó. Por defecto: 15 minutos.      |
-| `SCHEDULER_INTERVAL_SECONDS`    | `5`                                | Cada cuántos segundos revisa las publicaciones programadas.                                              |
-| `SCHEDULE_HISTORY_DAYS`         | `0`                                | Días que conserva registros de publicaciones terminadas. Admite hasta 30 días.                           |
-| `REPEAT_WARNING_DAYS`           | `7`                                | Días durante los que avisa de un producto repetido. Por defecto: 7 días.                                 |
-| `HTTP_TIMEOUT_SECONDS`          | `20`                               | Tiempo máximo en segundos de espera de una petición web.                                                 |
-| `TELEGRAM_POLL_TIMEOUT_SECONDS` | `25`                               | Tiempo en segundos que una consulta espera nuevos mensajes de Telegram. No retrasa la respuesta del bot. |
-| `TELEGRAM_RETRY_LIMIT`          | `3`                                | Reintentos ante ciertos fallos temporales al enviar publicaciones programadas.                           |
-| `MAX_DOWNLOAD_BYTES`            | `5000000`                          | Tamaño máximo de descarga de HTML o fotos, **en bytes**.                                                 |
-| `MAX_REDIRECTS`                 | `6`                                | Número máximo de redirecciones de un enlace.                                                             |
-| `MAX_IMAGE_PIXELS`              | `20000000`                         | Tamaño máximo de una imagen, **en píxeles**.                                                             |
-| `LOG_LEVEL`                     | `INFO`                             | Detalle de los registros: `DEBUG`, `INFO`, `WARNING` o `ERROR`.                                          |
-| `DATA_DIR`                      | `/data`                            | Carpeta **interna del contenedor** para la base de datos. Normalmente no se cambia.                      |
-| `FONT_DIR`                      | `/usr/share/fonts/truetype/dejavu` | Carpeta **interna del contenedor** con las fuentes. Normalmente no se cambia.                            |
+| Variable                        | Valor predeterminado               | Para qué sirve                                                                                                                                             |
+| ------------------------------- | ---------------------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `PREVIEW_TTL_SECONDS`           | `86400`                            | Caducidad del borrador desde su creación, en segundos. Por defecto: 24 h.                                                                                  |
+| `ENABLE_PUBLISH`                | `true`                             | Permite publicar y programar. `false` desactiva ambas acciones.                                                                                            |
+| `AMAZON_FETCH_HTML`             | `true`                             | Intenta obtener los datos desde Amazon. `false` deja la preparación manual.                                                                                |
+| `SCHEDULE_MAX_DELAY_SECONDS`    | `900`                              | Retraso máximo en segundos para enviar una programación cuya hora ya pasó. Por defecto: 15 minutos.                                                        |
+| `SCHEDULER_INTERVAL_SECONDS`    | `5`                                | Cada cuántos segundos revisa las publicaciones programadas.                                                                                                |
+| `SCHEDULE_HISTORY_DAYS`         | `0`                                | Días que conserva registros de publicaciones terminadas. Admite hasta 30 días.                                                                             |
+| `REPEAT_WARNING_DAYS`           | `7`                                | Días durante los que avisa de un producto repetido. Por defecto: 7 días.                                                                                   |
+| `HTTP_TIMEOUT_SECONDS`          | `20`                               | Tiempo máximo en segundos de espera de una petición web.                                                                                                   |
+| `TELEGRAM_POLL_TIMEOUT_SECONDS` | `25`                               | Tiempo en segundos que una consulta espera nuevos mensajes de Telegram. No retrasa la respuesta del bot.                                                   |
+| `TELEGRAM_RETRY_LIMIT`          | `3`                                | Reintentos ante ciertos fallos temporales al enviar publicaciones programadas.                                                                             |
+| `MAX_DOWNLOAD_BYTES`            | `5000000`                          | Tamaño máximo de descarga de HTML o fotos, **en bytes**.                                                                                                   |
+| `MAX_REDIRECTS`                 | `6`                                | Número máximo de redirecciones de un enlace.                                                                                                               |
+| `MAX_IMAGE_PIXELS`              | `20000000`                         | Tamaño máximo de una imagen, **en píxeles**.                                                                                                               |
+| `LOG_LEVEL`                     | `INFO`                             | Detalle de los registros: `DEBUG`, `INFO`, `WARNING` o `ERROR`.                                                                                            |
+| `DATA_DIR`                      | `/data`                            | Carpeta **interna del contenedor** para la base de datos. Normalmente no se cambia.                                                                        |
+| `FONT_DIR`                      | `/usr/share/fonts/truetype/dejavu` | Carpeta **interna del contenedor** con las fuentes. Normalmente no se cambia. [Cómo utilizar otra tipografía](docs/fuentes.md).                            |
 
 ### Permisos de las publicaciones programadas
 
