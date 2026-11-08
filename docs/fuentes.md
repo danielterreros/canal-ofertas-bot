@@ -37,7 +37,7 @@ Sustituye `/ruta/elegida/fuentes` por la ruta real de tu carpeta. Dentro del con
 
 Guarda el Compose y recrea el contenedor.
 
-Crea un borrador nuevo para comprobar la tipografía. Las imágenes ya guardadas conservarán la fuente anterior.
+Crea un borrador nuevo en el chat con tu bot para comprobar la tipografía. Las imágenes ya guardadas conservarán la fuente anterior.
 
 ## Volver a la fuente predeterminada
 
