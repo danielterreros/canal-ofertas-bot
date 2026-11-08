@@ -2,6 +2,8 @@
 
 > Publica ofertas de Amazon en tu grupo o canal de Telegram sin apenas esfuerzo. Envías el enlace de un producto, revisas la imagen y el texto, y decides si quieres **publicar** o **programar** la oferta.
 
+![Canal Ofertas Bot](https://raw.githubusercontent.com/danielterreros/pictures/main/canal-ofertas-bot/mockup.PNG)
+
 ## 🚀 Primeros pasos
 
 ### 1. Crea tu bot en Telegram
